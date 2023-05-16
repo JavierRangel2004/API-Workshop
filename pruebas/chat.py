@@ -1,6 +1,11 @@
 import requests
 import pandas as pd
 import datetime
+import os
+
+def clear():
+    input("Presione enter para continuar...")
+    os.system('clear')
 
 class PokemonGo():
     def __init__(self):
@@ -71,6 +76,7 @@ class PokemonGo():
         return df
 
     def get_weakness(self, pokemon):
+        
         df = self.get_pokemon_data(pokemon)
         return df['Debilidades'].values[0]
 
@@ -85,7 +91,9 @@ class PokemonGo():
     def basic_info(self, pokemon):
         tipo = self.get_pokemon_type(pokemon)
         df = self.get_pokemon_data(pokemon)
-
+        if df.empty:
+            print("No se encontro el pokemon")
+            return
         print(f"{pokemon} es de tipo {tipo}")
         print(f"{pokemon} es resistente a {df['Resistencias'].values[0]}")
         print(f"{pokemon} es debil contra {df['Debilidades'].values[0]}")
@@ -108,7 +116,28 @@ class PokemonGo():
 
 Api = PokemonGo()
 
-Api.createtypesdata()
-Api.save_pokemon('charizard')
-Api.save_pokemon('pikachu')
-Api.save_pokemon('bulbasaur')
+def menu():
+    print("Bienvenido a la Pokedex")
+    print("1. Buscar Pokemon")
+    print("2. Ver todos los pokemons")
+    print("3. Salir")
+    opcion = input("Ingrese una opcion: ")
+    return opcion
+
+while True:
+    Api.createtypesdata()
+    opcion = menu()
+    if opcion == "1":
+        pokemon = input("Ingrese el nombre del pokemon: ")
+        clear()
+        Api.basic_info(pokemon)
+        Api.save_pokemon(pokemon)
+    elif opcion == "2":
+        df = pd.read_csv('pokemons.csv')
+        print(df)
+        clear()
+    elif opcion == "3":
+        break
+    else:
+        print("Opcion invalida")
+        continue
