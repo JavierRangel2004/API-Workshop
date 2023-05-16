@@ -1,0 +1,4 @@
+nombre,tipo,debilidad,resistencia,ventaja
+charizard,fire,"['ground', 'rock', 'water']","['bug', 'steel', 'fire', 'grass', 'ice', 'fairy']","['bug', 'steel', 'grass', 'ice']"
+pikachu,electric,['ground'],"['flying', 'steel', 'electric']","['flying', 'water']"
+bulbasaur,grass,"['flying', 'poison', 'bug', 'fire', 'ice']","['ground', 'water', 'grass', 'electric']","['ground', 'rock', 'water']"
