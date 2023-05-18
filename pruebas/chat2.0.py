@@ -2,6 +2,7 @@ import requests
 import pandas as pd
 import datetime
 import os
+import plotly.graph_objects as go
 
 def clear():
     input("Presione enter para continuar...")
@@ -110,6 +111,36 @@ class PokemonGo():
         data = [{'nombre': pokemon, 'tipo': self.get_pokemon_type(pokemon), 'debilidad': self.get_weakness(pokemon), 'resistencia': self.get_resistance(pokemon), 'ventaja': self.get_advantage(pokemon)}]
         df = df.append(data, ignore_index=True)
         df.to_csv('pokemons.csv', index=False)
+    
+    def obtener_info_pokemon(self, nombre):
+        try:
+            url = f"{self.url}pokemon/{nombre.lower()}"
+            response = requests.get(url)
+            self.log_requests(response)
+            if response.status_code == 200:
+                data = response.json()
+                stats = {stat['stat']['name']: stat['base_stat'] for stat in data['stats']}
+                return stats
+            else:
+                print(f"No se encontró información para el Pokémon {nombre.capitalize()}.")
+                return None
+        except requests.exceptions.RequestException as e:
+            print(f"Hubo un problema al obtener los datos: {e}")
+            return None
+
+    def mostrar_grafica_estadisticas_pokemon(self, nombre):
+        info_pokemon = self.obtener_info_pokemon(nombre)
+        if info_pokemon:
+            stats = info_pokemon
+
+            # Graficar estadísticas
+            stats_fig = go.Figure(data=[go.Bar(x=list(stats.keys()), y=list(stats.values()))])
+            stats_fig.update_layout(title=f"Estadísticas de {nombre.capitalize()}",
+                                    xaxis_title="Estadística",
+                                    yaxis_title="Valor")
+            stats_fig.show()
+        else:
+            print(f"No se encontró información para el Pokémon {nombre.capitalize()}.")
 
 Api = PokemonGo()
 
@@ -129,6 +160,7 @@ while True:
         clear()
         Api.basic_info(pokemon)
         Api.save_pokemon(pokemon)
+        Api.mostrar_grafica_estadisticas_pokemon(pokemon)
     elif opcion == "2":
         try:
             df = pd.read_csv('pokemons.csv')
