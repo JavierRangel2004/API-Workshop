@@ -37,7 +37,7 @@ class PokemonGo():
                     ventaja = [v['name'] for v in tipo_data['damage_relations']['double_damage_to']]
 
                     if tipo['name'] not in ["unknown", "shadow"]:
-                        tipos.append({'Tipo': tipo['name'], 'Debilidades': debilidades, 'Resistencias': resistencias, 'Ventaja': ventaja})
+                        tipos.append({'Type': tipo['name'], 'Weaknesses': debilidades, 'Resistances': resistencias, 'Advantages': ventaja})
 
                 df = pd.DataFrame(tipos)
                 df.to_csv('tipos.csv', index=False)
@@ -156,7 +156,7 @@ while True:
     Api.createtypesdata()
     opcion = menu()
     if opcion == "1":
-        pokemon = input("Ingrese el nombre del Pokémon: ")
+        pokemon = input("Ingrese el nombre del Pokémon: ").lower()
         clear()
         Api.basic_info(pokemon)
         Api.save_pokemon(pokemon)
