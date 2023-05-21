@@ -6,7 +6,7 @@ import plotly.graph_objects as go
 
 def clear():
     input("Presione enter para continuar...")
-    os.system('clear')
+    os.system('cls')
 
 class PokemonGo():
     def __init__(self):
@@ -72,7 +72,7 @@ class PokemonGo():
         try:
             tipo = self.get_pokemon_type(pokemon)
             df = pd.read_csv('tipos.csv')
-            df = df[df['Tipo'] == tipo]
+            df = df[df['Type'] == tipo]
             return df
         except FileNotFoundError:
             print("No se encontró el archivo 'tipos.csv'")
