@@ -26,3 +26,10 @@
 2023-05-20 20:04:55.095164 - https://pokeapi.co/api/v2/pokemon/lugia - 200
 2023-05-20 20:04:55.284045 - https://pokeapi.co/api/v2/pokemon/lugia - 200
 2023-05-20 20:04:55.480600 - https://pokeapi.co/api/v2/pokemon/lugia - 200
+2023-05-20 20:07:39.486371 - https://pokeapi.co/api/v2/pokemon/lugia - 200
+2023-05-20 20:07:40.012087 - https://pokeapi.co/api/v2/pokemon/lugia - 200
+2023-05-20 20:07:41.525692 - https://pokeapi.co/api/v2/pokemon/lugia - 200
+2023-05-20 20:07:43.071152 - https://pokeapi.co/api/v2/pokemon/lugia - 200
+2023-05-20 20:07:43.279753 - https://pokeapi.co/api/v2/pokemon/lugia - 200
+2023-05-20 20:07:43.484005 - https://pokeapi.co/api/v2/pokemon/lugia - 200
+2023-05-20 20:07:43.693416 - https://pokeapi.co/api/v2/pokemon/lugia - 200
