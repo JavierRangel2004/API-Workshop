@@ -99,8 +99,6 @@ class PokemonGo():
         except TypeError:
             return None
         
-        
-
     def get_pokemon_data(self, pokemon):
         """
         Method to get the data of a specific Pokémon from the CSV file.
@@ -115,7 +113,6 @@ class PokemonGo():
                 df1 = df[df['Type'] == types[0]]  # Filter the DataFrame to include only the rows with the first type
                 df2 = df[df['Type'] == types[1]]  # Filter the DataFrame to include only the rows with the second type
                 df = pd.concat([df1, df2])  # Concatenate the two DataFrames
-
             return df  # Return the filtered DataFrame
         except FileNotFoundError:
             print("The file 'types.csv' was not found.")
@@ -157,8 +154,6 @@ class PokemonGo():
         """
         _, resistance = self.get_weakness_and_resistance(pokemon)  # Get the weakness and resistance types
         return resistance
-
-
 
     def get_advantage(self, pokemon):
         """

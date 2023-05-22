@@ -356,3 +356,4 @@ while True:
     else:
         print("Invalid option")  # If the user enters an invalid option
         clear()  # Clear the console screen
+
