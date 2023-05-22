@@ -89,10 +89,17 @@ class PokemonGo():
         """
         Method to get the type(s) of a specific Pokémon.
         """
-        data = self.get_pokemon(pokemon)  # Get the Pokémon data
-        # check if the pokemon has one or two types
-        types = [type_info['type']['name'] for type_info in data['types']] if data else None  # Extract the type(s) from the data if it exists, otherwise return None
-        return types
+        try:
+            data = self.get_pokemon(pokemon)  # Get the Pokémon data
+            try:
+                types = [type_info['type']['name'] for type_info in data['types']] if data else None  # Extract the type(s) from the data if it exists, otherwise return None
+                return types
+            except KeyError:
+                return None
+        except TypeError:
+            return None
+        
+        
 
     def get_pokemon_data(self, pokemon):
         """
