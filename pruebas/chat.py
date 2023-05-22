@@ -287,6 +287,7 @@ def clear_csv():
     try:
         os.remove('pokemons.csv')#Remove the file
         os.remove('pokemons_stats.csv')#Remove the file
+        os.remove('types.csv')#Remove the file
 
         print("The CSV file was cleared successfully.")#Print a message
     except FileNotFoundError:#If the file was not found
