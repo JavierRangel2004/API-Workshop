@@ -80,7 +80,6 @@ class PokemonGo():
             if response.status_code == 200:  # If the request is successful
                 return response.json()  # Convert the response to JSON format and return it
             else:
-                print("The pokemon was not found.")
                 return None
         except requests.exceptions.RequestException as e:
             print(f"There was a problem obtaining the data: {e}")
@@ -180,8 +179,10 @@ class PokemonGo():
             print(f"{pokemon} is resistant to {', '.join(self.get_resistance(pokemon))}")  # Print the Pokémon's resistance types
             print(f"{pokemon} is weak against {', '.join(self.get_weakness(pokemon))}")  # Print the Pokémon's weakness types
             print(f"{pokemon} has advantage against {', '.join(self.get_advantage(pokemon))}")  # Print the Pokémon's advantage types
+            return 1
         else:
             print("The Pokémon was not found.")
+            return 0
 
     def save_pokemon(self, pokemon):
         """
@@ -192,29 +193,56 @@ class PokemonGo():
             df = pd.read_csv('pokemons.csv')  # Try to read the Pokémon data from the CSV file
         except FileNotFoundError:
             df.to_csv('pokemons.csv', index=False)  # If the file doesn't exist, create a new CSV file with the DataFrame structure
-        
-        data = [{'name': pokemon, 'type': ', '.join(self.get_pokemon_type(pokemon)), 'weakness': ', '.join(self.get_weakness(pokemon)), 'resistance': ', '.join(self.get_resistance(pokemon)), 'advantage': ', '.join(self.get_advantage(pokemon))}]  # Create a dictionary with the Pokémon details
-        df = df.append(data, ignore_index=True)  # Append the dictionary to the DataFrame
-        df.to_csv('pokemons.csv', index=False)  # Save the DataFrame to the CSV file
+        try:
+            data = [{'name': pokemon, 'type': ', '.join(self.get_pokemon_type(pokemon)), 'weakness': ', '.join(self.get_weakness(pokemon)), 'resistance': ', '.join(self.get_resistance(pokemon)), 'advantage': ', '.join(self.get_advantage(pokemon))}]  # Create a dictionary with the Pokémon details
+            df = df.append(data, ignore_index=True)  # Append the dictionary to the DataFrame
+            df.to_csv('pokemons.csv', index=False)  # Save the DataFrame to the CSV file
+        except:
+            print("The Pokémon was not found.")
 
-    def get_pokemon_info(self, name):
+    def get_pokemon_stats(self, name):
         """
-        Method to get the detailed information about a specific Pokémon.
+        Method to create a csv file with the pokemon stats.
         """
         try:
             url = f"{self.url}pokemon/{name.lower()}"
             response = requests.get(url)  # Send a GET request to fetch the detailed information of the Pokémon
             self.log_requests(response)  # Log the request
-            if response.status_code == 200:  # If the request is successful
-                data = response.json()  # Convert the response to JSON format
-                stats = {stat['stat']['name']: stat['base_stat'] for stat in data['stats']}  # Extract the stats and their values
-                return stats  # Return the stats dictionary
+            if response.status_code == 200:  # If the request is successful 
+                df = pd.DataFrame(columns=['name', 'hp', 'attack', 'defense', 'special_attack', 'special_defense', 'speed'])  # Create an empty DataFrame with the specified columns
+                try:
+                    df = pd.read_csv('pokemons_stats.csv')  # Try to read the Pokémon data from the CSV file
+                except FileNotFoundError:
+                    df.to_csv('pokemons_stats.csv', index=False)
+                data = [{'name': name, 'hp': response.json()['stats'][0]['base_stat'], 'attack': response.json()['stats'][1]['base_stat'], 'defense': response.json()['stats'][2]['base_stat'], 'special_attack': response.json()['stats'][3]['base_stat'], 'special_defense': response.json()['stats'][4]['base_stat'], 'speed': response.json()['stats'][5]['base_stat']}]  # Create a dictionary with the Pokémon details
+                df = df.append(data, ignore_index=True)  # Append the dictionary to the DataFrame
+                df.to_csv('pokemons_stats.csv', index=False)  # Save the DataFrame to the CSV file
+
             else:
                 print(f"No information was found for the Pokémon {name.capitalize()}.")
                 return None
         except requests.exceptions.RequestException as e:
             print(f"There was a problem obtaining the data: {e}")
             return None
+        
+    def get_pokemon_info(self, name):
+        """
+        Method to get the pokemon stats.
+        """
+        try:
+            url = f"{self.url}pokemon/{name.lower()}"#Get the url of the pokemon
+            response = requests.get(url)#Get the pokemon data
+            self.log_requests(response)#Log the request
+            if response.status_code == 200:#If the pokemon was found
+                data = response.json()#Get the pokemon data
+                stats = {stat['stat']['name']: stat['base_stat'] for stat in data['stats']}#Get the pokemon stats
+                return stats#Return the pokemon stats
+            else:
+                print(f"No information was found for the Pokémon {name.capitalize()}.")#Print a message if the pokemon was not found
+                return None#Return None
+        except requests.exceptions.RequestException as e:#If there was an error
+            print(f"There was a problem obtaining the data: {e}")#Print the error
+            return None#Return None
 
     def show_pokemon_stats_graph(self, name):
         """
@@ -222,8 +250,7 @@ class PokemonGo():
         """
         pokemon_info = self.get_pokemon_info(name)  # Get the detailed information of the Pokémon
         if pokemon_info:
-            stats = pokemon_info
-
+            stats = pokemon_info  # Get the stats of the Pokémon
             # Plot stats
             stats_fig = go.Figure(data=[go.Bar(x=list(stats.keys()), y=list(stats.values()))])  # Create a bar graph using plotly
             stats_fig.update_layout(title=f"{name.capitalize()}'s Statistics",
@@ -232,15 +259,51 @@ class PokemonGo():
             stats_fig.show()  # Show the bar graph
         else:
             print(f"No information was found for the Pokémon {name.capitalize()}.")
+    
+    def all_pokemon_stats(self):
+        """
+        Method to show a bar graph of the statistics of all Pokémon sort by highest total stats.
+        """
+        try:
+            df= pd.read_csv('pokemons_stats.csv')  # Try to read the Pokémon data from the CSV file
+            total = df['hp'] + df['attack'] + df['defense'] + df['special_attack'] + df['special_defense'] + df['speed']  # Calculate the total stats of each Pokémon
+            df['total'] = total
+            df = df.sort_values(by=['total'], ascending=False)#sort the total stats from highest to lowest
+            df.to_csv('pokemons_stats.csv', index=False)  # Save the DataFrame to the CSV file
+            df = pd.read_csv('pokemons_stats.csv')  # Try to read the Pokémon data from the CSV file
+            total = df['total']#Get the total stats
+            stats_fig = go.Figure(data=[go.Bar(x=df['name'], y=total)])  # Create a bar graph using plotly
+            stats_fig.update_layout(title="Your Pokémon team Statistics",#set the title and axis labels
+                                    xaxis_title="Pokémon",
+                                    yaxis_title="Total Stats")
+            stats_fig.show()  # Show the bar graph
+        except FileNotFoundError:#If the file was not found
+            print("No Pokémon data was found.")#Print a message
+            return None
+def clear_csv():
+    """
+    Function to delete the CSV file.
+    """
+    try:
+        os.remove('pokemons.csv')#Remove the file
+        os.remove('pokemons_stats.csv')#Remove the file
+
+        print("The CSV file was cleared successfully.")#Print a message
+    except FileNotFoundError:#If the file was not found
+        print("The CSV file does not exist.")#Print a message
+        return None
+    
 
 def menu():
     """
     Function to display the main menu of the Pokedex application.
     """
     print("Welcome to the Pokedex")
-    print("1. Search Pokémon")
+    print("1. Register Pokémon")
     print("2. View all Pokémon")
-    print("3. Exit")
+    print("3. Stats of all Pokémon")
+    print("4. Clear files")
+    print("5. Exit")
     option = input("Enter an option: ")  # Prompt the user to enter an option
     return option
 
@@ -252,19 +315,36 @@ while True:
     if option == "1":  # If the user selects option 1
         pokemon = input("Enter the Pokémon's name: ").lower()  # Prompt the user to enter a Pokémon name
         clear()  # Clear the console screen
-        Api.basic_info(pokemon)  # Display basic information about the Pokémon
-        Api.save_pokemon(pokemon)  # Save the Pokémon's details to the CSV file
-        Api.show_pokemon_stats_graph(pokemon)  # Show the bar graph of the Pokémon's statistics
+        control = Api.basic_info(pokemon)  # Display basic information about the Pokémon
+        if control == 1:  # If the Pokémon was not found
+            Api.save_pokemon(pokemon)  # Save the Pokémon's details to the CSV file
+            Api.get_pokemon_stats(pokemon)  # Get the Pokémon's detailed information
+            Api.show_pokemon_stats_graph(pokemon)  # Show the bar graph of the Pokémon's statistics
+        else:
+            pass
+        clear()  # Clear the console screen
+
     elif option == "2":  # If the user selects option 2
         try:
+            os.system('cls')  # Clear the console screen
             df = pd.read_csv('pokemons.csv')  # Read the Pokémon data from the CSV file
             print(df)  # Print the DataFrame
             clear()  # Clear the console screen
         except FileNotFoundError:
-            print("The file 'pokemons.csv' was not found.")
+            print("You have not registered pokemons yet.")
             clear()  # Clear the console screen
+
     elif option == "3":  # If the user selects option 3
+        Api.all_pokemon_stats()  # Show the bar graph of the statistics of all Pokémon
+        clear()  # Clear the console screen
+
+    elif option == "4":  # If the user selects option 4
+        clear_csv()  # Clear the CSV file
+        clear()  # Clear the console screen
+
+    elif option == "5":  # If the user selects option 3
         break  # Exit the program
+
     else:
         print("Invalid option")  # If the user enters an invalid option
         clear()  # Clear the console screen
