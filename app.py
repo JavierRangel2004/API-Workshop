@@ -16,7 +16,9 @@ def home():
 
 @app.route('/add', methods=['POST'])
 def add():
-    name = request.form.get('pokemon').lower()
+    name = request.form.get('pokemon').lower().replace(" ", "-")
+    if name[len(name)-1] == "-":
+        name=name.replace("-", "")
     basic_info = pokedex.basic_info(name)
     messages=[]
     if basic_info["notFound"]:

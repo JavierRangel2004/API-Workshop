@@ -33,6 +33,10 @@
                     <p class = "message">{{ message }}</p>
                     {% endfor %}
                 </div>
+                {% else %}
+                    {% for message in messages %}
+                    <p class = "message">{{ message }}</p>
+                    {% endfor %}
                 {% endif %}
                 
             {% endif %}
