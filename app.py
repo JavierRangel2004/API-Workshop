@@ -22,7 +22,7 @@ def add():
     if basic_info["notFound"]:
         messages.append("The Pokémon was not found.")
     else:
-        messages.append(f'{name.capitalize()} is of type {" ".join(basic_info["type"])}')
+        messages.append(f'{name.capitalize()} is {" ".join(basic_info["type"])} type')
         messages.append(f'{name.capitalize()} is resistant to {", ".join(basic_info["resistant"])}')
         messages.append(f'{name.capitalize()} is weak against {", ".join(basic_info["weaknesses"])}')
         messages.append(f'{name.capitalize()} has advantage against {", ".join(basic_info["advantages"])}')

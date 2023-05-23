@@ -7,6 +7,12 @@ body{
   background-size: cover;
   background-position: center;
 }
+body p{
+  font-family: Pokemon;
+  font-size: 20px;
+  text-align: center;
+  margin: 0%;
+}
 nav{
     list-style-type: none;
     margin: 0;
@@ -82,7 +88,8 @@ h2{
     font-size: 30px;
     text-align: center;
 }
-p.message{
+body 
+.message{
     font-family: Pokemon;
     font-size: 30px;
     color : rgb(134, 92, 28);
