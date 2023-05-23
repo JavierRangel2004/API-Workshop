@@ -16,7 +16,7 @@ def home():
 
 @app.route('/add', methods=['POST'])
 def add():
-    name = request.form.get('pokemon')
+    name = request.form.get('pokemon').lower()
     basic_info = pokedex.basic_info(name)
 
     if basic_info["notFound"]:
