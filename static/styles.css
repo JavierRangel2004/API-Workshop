@@ -1,0 +1,72 @@
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8d5d6;
+    color: #3b4cca;
+    padding: 30px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+body p {
+    font-family: 'Roboto', sans-serif;
+}
+h1 {
+    color: #FFCB05;
+    text-shadow: 2px 2px #3D7DCA;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #3D7DCA;
+    text-shadow: 1px 1px #FFCB05;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 2em;
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #7038F8;
+}
+
+input[type="text"] {
+    width: 200px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 0 15px #3D7DCA;
+}
+
+input[type="submit"] {
+    background-color: #F08030;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    transform: scale(1.1);
+}
+a {
+    display: inline-block;
+    margin-top: 20px;
+    background-color: #6890F0;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+a:hover {
+    transform: translateY(-5px);
+}

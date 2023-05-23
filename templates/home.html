@@ -2,6 +2,10 @@
 <html>
 <head>
     <title>Pokédex</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
 </head>
 <body>
     <h1>Welcome to the Pokédex</h1>
@@ -11,7 +15,6 @@
         <input type="submit" value="Register Pokémon">
     </form>
     {% if message %}
-        <h2>Output:</h1>
         <p>{{ message }}</p>
     {% endif %}
     <br>

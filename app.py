@@ -33,14 +33,32 @@ def add():
     
     return render_template('home.html', message=message)
 
+# @app.route('/show_all')
+# def show_all():
+#     try:
+#         df = pd.read_csv('pokemons.csv')
+#         pokemons = df.to_dict(orient='records')
+#     except FileNotFoundError:
+#         pokemons = []
+#     return render_template('show_all.html', pokemons=pokemons)
+
 @app.route('/show_all')
 def show_all():
     try:
         df = pd.read_csv('pokemons.csv')
-        pokemons = df.to_dict(orient='records')
+        table = go.Figure(data=[go.Table(
+            header=dict(values=list(df.columns),
+                        fill_color='paleturquoise',
+                        align='left'),
+            cells=dict(values=[df.name, df.type, df.weakness, df.resistance, df.advantage],
+                       fill_color='lavender',
+                       align='left'))
+        ])
+        table_div = pyo.plot(table, output_type='div', include_plotlyjs=False)
     except FileNotFoundError:
-        pokemons = []
-    return render_template('show_all.html', pokemons=pokemons)
+        table_div = ""
+    return render_template('show_all.html', table_div=table_div)
+
 
 @app.route('/show_stats')
 def show_stats():
