@@ -12,6 +12,14 @@
     <div>
         {{ plot_div|safe }}
     </div>
+    <div class="pokemon-container">
+        {% for pokemon in pokemons_stats %}
+            <div>
+                <img src="{{ pokemon.image }}" alt="{{ pokemon.name }}">
+                <p>{{ pokemon.name }}</p>
+            </div>
+        {% endfor %}
+    </div>
     <a href="/">Back</a>
 </body>
 </html>

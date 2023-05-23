@@ -86,6 +86,20 @@ class PokemonGo():
             print(f"There was a problem obtaining the data: {e}")
             return None
 
+    def get_pokemon_image(self, pokemon):
+        """
+        Method to get the image of a specific Pokémon.
+        """
+        try:
+            data = self.get_pokemon(pokemon)  # Get the Pokémon data
+            try:
+                image = data['sprites']['front_default'] if data else None  # Extract the image URL from the data if it exists, otherwise return None
+                return image
+            except KeyError:
+                return None
+        except TypeError:
+            return None
+
     def get_pokemon_type(self, pokemon):
         """
         Method to get the type(s) of a specific Pokémon.
@@ -189,6 +203,17 @@ class PokemonGo():
             return {
                 "notFound": True
             }
+
+    def pokemon_already_saved(self, pokemon):
+        """
+        Method to check if a Pokémon's details are already saved in the CSV file.
+        """
+        df = pd.DataFrame(columns=['name', 'type', 'weakness', 'resistance', 'advantage'])
+        try:
+            df = pd.read_csv('pokemons.csv')  # Try to read the Pokémon data from the CSV file
+        except FileNotFoundError:
+            pass
+        return pokemon in df['name'].values  # Return True if the Pokémon is already saved, otherwise return False
 
     def save_pokemon(self, pokemon):
         """
