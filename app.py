@@ -21,22 +21,19 @@ def add():
     messages=[]
     if basic_info["notFound"]:
         messages.append("The Pokémon was not found.")
+        image=""
     else:
-        messages.append(f'{name.capitalize()} is {" ".join(basic_info["type"])} type')
-        messages.append(f'{name.capitalize()} is resistant to {", ".join(basic_info["resistant"])}')
-        messages.append(f'{name.capitalize()} is weak against {", ".join(basic_info["weaknesses"])}')
-        messages.append(f'{name.capitalize()} has advantage against {", ".join(basic_info["advantages"])}')
-
-        message = f'{name.capitalize()} is of type {" ".join(basic_info["type"])}\n' + \
-                             f'{name.capitalize()} is resistant to {", ".join(basic_info["resistant"])}\n' + \
-                             f'{name.capitalize()} is weak against {", ".join(basic_info["weaknesses"])}\n' + \
-                             f'{name.capitalize()} has advantage against {", ".join(basic_info["advantages"])}'
+        image=pokedex.get_pokemon_image(name)
+        messages.append(f'{name.capitalize()}')
+        messages.append(f'Resistances: {", ".join(basic_info["resistant"])}')
+        messages.append(f'Weaknesses: {", ".join(basic_info["weaknesses"])}')
+        messages.append(f'Advantages: {", ".join(basic_info["advantages"])}')
     
     if not basic_info["notFound"] and not pokedex.pokemon_already_saved(name) :
         pokedex.save_pokemon(name)
         pokedex.get_pokemon_stats(name)
     
-    return render_template('home.html', messages=messages)
+    return render_template('home.html', messages=messages, image=image)
 
 @app.route('/show_all')
 def show_all():
@@ -54,28 +51,6 @@ def show_all():
     except FileNotFoundError:
         table_div = ""
     return render_template('show_all.html', table_div=table_div)
-
-# @app.route('/show_stats')
-# def show_stats():
-#     try:
-#         pokemons_stats = df.to_dict(orient='records')
-#         df= pd.read_csv('pokemons_stats.csv')  # Try to read the Pokémon data from the CSV file
-#         total = df['hp'] + df['attack'] + df['defense'] + df['special_attack'] + df['special_defense'] + df['speed']  # Calculate the total stats of each Pokémon
-#         df['total'] = total
-#         df = df.sort_values(by=['total'], ascending=False)#sort the total stats from highest to lowest
-#         df.to_csv('pokemons_stats.csv', index=False)  # Save the DataFrame to the CSV file
-#         df = pd.read_csv('pokemons_stats.csv')  # Try to read the Pokémon data from the CSV file
-#         total = df['total']#Get the total stats
-#         stats_fig = go.Figure(data=[go.Bar(x=df['name'], y=total)])  # Create a bar graph using plotly
-#         stats_fig.update_layout(title="Your Pokémon team Statistics",#set the title and axis labels
-#                                     xaxis_title="Pokémon",
-#                                     yaxis_title="Total Stats")
-#         plot_div = pyo.plot(stats_fig, output_type='div', include_plotlyjs=False)
-
-#     except FileNotFoundError:
-#         pokemons_stats = []
-#         plot_div = ""
-#     return render_template('show_stats.html', pokemons_stats=pokemons_stats, plot_div=plot_div)
 
 @app.route('/show_stats')
 def show_stats():
@@ -104,8 +79,6 @@ def show_stats():
         plot_div = ""
 
     return render_template('show_stats.html', pokemons_stats=pokemons_stats, plot_div=plot_div)
-
-
 
 @app.route('/clear')
 def clear():

@@ -24,12 +24,17 @@
                 <span class="add-icon"></span>
             </div>
         </form>
-            {% if messages %}
+            {% if messages%}
                 <h2>Results:</h2>
-                {% for message in messages %}
+                {% if image%}
+                <div class="pokedex">
+                    <img src="{{ image }}" alt="Pokemon Image">
+                    {% for message in messages %}
                     <p class = "message">{{ message }}</p>
-                {% endfor %}
-                <p class = "message">{{ message }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
             {% endif %}
     </div>
 </body>

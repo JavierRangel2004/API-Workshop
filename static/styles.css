@@ -68,27 +68,24 @@ header{
     font-size: 30px;
     text-align: center;
 }
-
 .pokemon-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
-
 .pokemon-container img {
   margin: 10px;
   align-self: center;
   width: 150px;
   height: auto;
 }
-
 h2{
     font-family: Pokemon;
     font-size: 30px;
     text-align: center;
 }
-body 
+/*
 .message{
     font-family: Pokemon;
     font-size: 30px;
@@ -99,8 +96,45 @@ body
     margin-left: auto;
     margin-right: auto;
     display: block;
-
 }
+*/
+
+.pokedex {
+  width: 90%;
+  max-width: 500px;
+  margin: auto;
+  background: #f00;
+  border: 5px solid #000;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pokedex img {
+  width: 70%;
+  height: 200px;
+  object-fit: contain;
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.message {
+  background: #fff;
+  color: #000;
+  padding: 5px;
+  margin: 5px 0;
+  width: 100%;
+  text-align: center;
+  border: 2px solid #000;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
 label{
     font-family: Pokemon;
     font-size: 40px;
@@ -129,16 +163,13 @@ label{
     margin-right: auto;
     display: block;
   }
-  
   .input::placeholder {
     color: var(--font-color-sub);
     opacity: 0.8;
   }
-  
   .input:focus {
     border: 2px solid var(--input-focus);
   }
-
   .icon-btn {
     width: 50px;
     height: 50px;
@@ -154,11 +185,9 @@ label{
     margin-right: auto;
     display: block;
   }
-  
   .add-btn:hover {
     width: 120px;
   }
-  
   .add-btn::before,
   .add-btn::after {
     transition: width 0.2s ease-in-out, border-radius 0.2s ease-in-out;
@@ -169,24 +198,20 @@ label{
     top: calc(50% - 2px);
     background: seagreen;
   }
-  
   .add-btn::after {
     right: 14px;
     overflow: hidden;
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
   }
-  
   .add-btn::before {
     left: 14px;
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px;
   }
-  
   .icon-btn:focus {
     outline: none;
   }
-  
   .btn-input {
     opacity: 0;
     transition: opacity 0.2s;
@@ -197,17 +222,14 @@ label{
     height: 100%;
     cursor: pointer;
   }
-  
   .add-btn:hover::before,
   .add-btn:hover::after {
     width: 0;
     border-radius: 0;
   }
-  
   .add-btn:hover .btn-input {
     opacity: 1;
   }
-  
   .add-icon::after,
   .add-icon::before {
     transition: all 0.2s ease-in-out;
@@ -219,28 +241,23 @@ label{
     background: seagreen;
     overflow: hidden;
   }
-  
   .add-icon::before {
     left: 22px;
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px;
   }
-  
   .add-icon::after {
     right: 24px;
     border-top-right-radius: 2px;
     border-bottom-right-radius: 2px;
   }
-  
   .add-btn:hover .add-icon::before {
     left: 15px;
     height: 0;
     top: calc(50% - 2px);
   }
-  
   .add-btn:hover .add-icon::after {
     right: 15px;
     height: 0;
     top: calc(50% - 2px);
   } 
- 

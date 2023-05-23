@@ -1,0 +1,4 @@
+name,type,weakness,resistance,advantage
+charmander,fire,"ground, rock, water","bug, fairy, fire, grass, ice, steel","bug, grass, ice, steel"
+snorlax,normal,fighting,,
+pikachu,electric,ground,"electric, flying, steel","flying, water"
