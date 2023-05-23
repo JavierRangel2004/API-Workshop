@@ -178,14 +178,17 @@ class PokemonGo():
         """
         types = self.get_pokemon_type(pokemon)  # Get the type(s) of the Pokémon
         if types:
-            print(f"{pokemon} is of type {', '.join(types)}")  # Print the Pokémon's type(s)
-            print(f"{pokemon} is resistant to {', '.join(self.get_resistance(pokemon))}")  # Print the Pokémon's resistance types
-            print(f"{pokemon} is weak against {', '.join(self.get_weakness(pokemon))}")  # Print the Pokémon's weakness types
-            print(f"{pokemon} has advantage against {', '.join(self.get_advantage(pokemon))}")  # Print the Pokémon's advantage types
-            return 1
+            return {
+                "notFound": False,
+                "type": types,
+                "resistant": self.get_resistance(pokemon),
+                "weaknesses": self.get_weakness(pokemon),
+                "advantages": self.get_advantage(pokemon)
+            }
         else:
-            print("The Pokémon was not found.")
-            return 0
+            return {
+                "notFound": True
+            }
 
     def save_pokemon(self, pokemon):
         """
