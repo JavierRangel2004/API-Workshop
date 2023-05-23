@@ -9,7 +9,7 @@
 
 <div align="center">
     <p>
-    PokémonGo is a Python-based application that uses the <a href="https://pokeapi.co/">PokéAPI</a> to fetch data about different Pokémon and store it locally for future use and analysis. The tool is also capable of displaying the fetched data in different ways including graphically.
+    PokémonGo is a Python-based web application that uses the <a href="https://pokeapi.co/">PokéAPI</a> to fetch data about different Pokémon and store it locally for future use and analysis. The tool is also capable of displaying the fetched data in different ways including graphically.
     </p>
 </div>
 
@@ -25,38 +25,26 @@
 
 1. Clone the repository to your local machine using:
    ```bash
-   git clone https://github.com/username/pokemongo.git
+   git clone git@github.com:JavierRangel2004/API-Workshop.git
    ```
 2. Navigate into the cloned directory:
    ```bash
-   cd pokemongo
+   cd API-Workshop
    ```
 3. Make sure you have the required Python packages installed. You can install them via pip:
    ```bash
-   pip install pandas plotly requests
+   pip install flask pandas plotly requests
    ```
 
 <h2 id="usage"> ⚙️ Usage ⚙️ </h2>
 
-To start using PokémonGo, run the `pokedex.py` script:
+To start using PokémonGo, run the `flask run` command in the root directory of the project:
 
 ```bash
-python pokedex.py
+flask run
 ```
 
-This will start the application and display the main menu with several options to interact with the Pokémon data.
-
-Here is an example of what the menu looks like:
-
-```
-Welcome to the Pokedex
-1. Register Pokémon
-2. View all Pokémon
-3. Stats of all Pokémon
-4. Clear files
-5. Exit
-Enter an option:
-```
+This will start the web application and provide a link to access the web interface (usually `http://127.0.0.1:5000` or `http://localhost:5000`).
 
 <h2 id="features"> 🌟 Features 🌟 </h2>
 
@@ -70,11 +58,8 @@ Here are the main functionalities of PokémonGo:
 
 4. **Clear files**: Deletes all the locally stored CSV files containing Pokémon data.
 
-5. **Exit**: Quits the application.
-
 <h2 id="future-enhancements"> 💡 Future Enhancements 💡 </h2>
 
-- Integrate a GUI for easier interaction and better user experience.
 - Add a function to compare two or more Pokémon.
 - Improve error handling and user input validation.
 
@@ -84,4 +69,3 @@ Contributions are always welcome! Please feel free to submit a Pull Request. If 
 
 ---
 **NOTE:** This application is a fan-made project and is not affiliated with the official Pokémon franchise. All Pokémon information and data are retrieved from [PokéAPI](https://pokeapi.co/).
-```
