@@ -10,12 +10,6 @@
         <input type="text" id="pokemon" name="pokemon"><br>
         <input type="submit" value="Register Pokémon">
     </form>
-    {% if basic_info %}
-    <div>
-        <h3>Recently Registered Pokémon Info:</h3>
-        <p>{{ basic_info }}</p>
-    </div>
-    {% endif %}
     {% if message %}
         <h2>Output:</h1>
         <p>{{ message }}</p>

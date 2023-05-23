@@ -69,3 +69,4 @@ Contributions are always welcome! Please feel free to submit a Pull Request. If 
 
 ---
 **NOTE:** This application is a fan-made project and is not affiliated with the official Pokémon franchise. All Pokémon information and data are retrieved from [PokéAPI](https://pokeapi.co/).
+```
