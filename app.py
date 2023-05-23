@@ -110,13 +110,14 @@ def show_stats():
 @app.route('/clear')
 def clear():
     try:
+        messages = []
         os.remove('log.txt')
         os.remove('pokemons.csv')
         os.remove('pokemons_stats.csv')
-        message = "The CSV files were cleared successfully."
+        messages.append("The files were cleared successfully.")
     except FileNotFoundError:
-        message = "The CSV files do not exist."
-    return render_template('home.html', message=message)
+        messages.append("There are no files to clear.")
+    return render_template('home.html', messages=messages)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,0 +1,19 @@
+Type,Weaknesses,Resistances,Advantages
+normal,['fighting'],[],[]
+fighting,"['flying', 'psychic', 'fairy']","['rock', 'bug', 'dark']","['normal', 'rock', 'steel', 'ice', 'dark']"
+flying,"['rock', 'electric', 'ice']","['fighting', 'bug', 'grass']","['fighting', 'bug', 'grass']"
+poison,"['ground', 'psychic']","['fighting', 'poison', 'bug', 'grass', 'fairy']","['grass', 'fairy']"
+ground,"['water', 'grass', 'ice']","['poison', 'rock']","['poison', 'rock', 'steel', 'fire', 'electric']"
+rock,"['fighting', 'ground', 'steel', 'water', 'grass']","['normal', 'flying', 'poison', 'fire']","['flying', 'bug', 'fire', 'ice']"
+bug,"['flying', 'rock', 'fire']","['fighting', 'ground', 'grass']","['grass', 'psychic', 'dark']"
+ghost,"['ghost', 'dark']","['poison', 'bug']","['ghost', 'psychic']"
+steel,"['fighting', 'ground', 'fire']","['normal', 'flying', 'rock', 'bug', 'steel', 'grass', 'psychic', 'ice', 'dragon', 'fairy']","['rock', 'ice', 'fairy']"
+fire,"['ground', 'rock', 'water']","['bug', 'steel', 'fire', 'grass', 'ice', 'fairy']","['bug', 'steel', 'grass', 'ice']"
+water,"['grass', 'electric']","['steel', 'fire', 'water', 'ice']","['ground', 'rock', 'fire']"
+grass,"['flying', 'poison', 'bug', 'fire', 'ice']","['ground', 'water', 'grass', 'electric']","['ground', 'rock', 'water']"
+electric,['ground'],"['flying', 'steel', 'electric']","['flying', 'water']"
+psychic,"['bug', 'ghost', 'dark']","['fighting', 'psychic']","['fighting', 'poison']"
+ice,"['fighting', 'rock', 'steel', 'fire']",['ice'],"['flying', 'ground', 'grass', 'dragon']"
+dragon,"['ice', 'dragon', 'fairy']","['fire', 'water', 'grass', 'electric']",['dragon']
+dark,"['fighting', 'bug', 'fairy']","['ghost', 'dark']","['ghost', 'psychic']"
+fairy,"['poison', 'steel']","['fighting', 'bug', 'dark']","['fighting', 'dragon', 'dark']"
