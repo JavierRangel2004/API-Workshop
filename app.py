@@ -16,13 +16,13 @@ def home():
 
 @app.route('/add', methods=['POST'])
 def add():
-    name = request.form.get('pokemon')
+    name = request.form.get('pokemon').lower()
     basic_info = pokedex.basic_info(name)
 
     if basic_info["notFound"]:
         message = "The Pokémon was not found."
     else:
-        message = f'{name.capitalize()} is of type {basic_info["type"]}\n' + \
+        message = f'{name.capitalize()} is of type {", ".join(basic_info["type"])}\n' + \
                              f'{name.capitalize()} is resistant to {", ".join(basic_info["resistant"])}\n' + \
                              f'{name.capitalize()} is weak against {", ".join(basic_info["weaknesses"])}\n' + \
                              f'{name.capitalize()} has advantage against {", ".join(basic_info["advantages"])}'
@@ -93,14 +93,10 @@ def show_stats():
                                     xaxis_title="Pokémon",
                                     yaxis_title="Total Stats")
         plot_div = pyo.plot(stats_fig, output_type='div', include_plotlyjs=False)
-
     except FileNotFoundError:
         pokemons_stats = []
         plot_div = ""
-
     return render_template('show_stats.html', pokemons_stats=pokemons_stats, plot_div=plot_div)
-
-
 
 @app.route('/clear')
 def clear():
