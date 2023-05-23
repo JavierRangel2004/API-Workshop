@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pokémon List</title>
+</head>
+<body>
+    <h1>All Pokémon</h1>
+    {% for pokemon in pokemons %}
+        <p>Name: {{ pokemon.name }} | Type: {{ pokemon.type }} | Weakness: {{ pokemon.weakness }} | Resistance: {{ pokemon.resistance }} | Advantage: {{ pokemon.advantage }}</p>
+    {% endfor %}
+    <a href="/">Back</a>
+</body>
+</html>

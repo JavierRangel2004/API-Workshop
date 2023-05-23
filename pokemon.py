@@ -3,6 +3,7 @@ import pandas as pd  # Importing the pandas library for data manipulation and an
 import datetime  # Importing the datetime module for working with dates and times
 import os  # Importing the os module for interacting with the operating system
 import plotly.graph_objects as go  # Importing the graph_objects module from the plotly library for creating interactive visualizations
+import tkinter as tk
 
 def clear():
     """
@@ -99,8 +100,6 @@ class PokemonGo():
         except TypeError:
             return None
         
-        
-
     def get_pokemon_data(self, pokemon):
         """
         Method to get the data of a specific Pokémon from the CSV file.
@@ -115,7 +114,6 @@ class PokemonGo():
                 df1 = df[df['Type'] == types[0]]  # Filter the DataFrame to include only the rows with the first type
                 df2 = df[df['Type'] == types[1]]  # Filter the DataFrame to include only the rows with the second type
                 df = pd.concat([df1, df2])  # Concatenate the two DataFrames
-
             return df  # Return the filtered DataFrame
         except FileNotFoundError:
             print("The file 'types.csv' was not found.")
@@ -157,8 +155,6 @@ class PokemonGo():
         """
         _, resistance = self.get_weakness_and_resistance(pokemon)  # Get the weakness and resistance types
         return resistance
-
-
 
     def get_advantage(self, pokemon):
         """
@@ -294,7 +290,7 @@ def clear_csv():
     try:
         os.remove('pokemons.csv')#Remove the file
         os.remove('pokemons_stats.csv')#Remove the file
-        os.remove('types.csv')#Remove the file
+        os.remove('log.txt')#Remove the file
 
         print("The CSV file was cleared successfully.")#Print a message
     except FileNotFoundError:#If the file was not found
@@ -315,45 +311,49 @@ def menu():
     option = input("Enter an option: ")  # Prompt the user to enter an option
     return option
 
-Api = PokemonGo()  # Create an instance of the PokemonGo class
 
-while True:
-    Api.createtypesdata()  # Create the types data if it doesn't exist
-    option = menu()  # Display the main menu and get the user's option
-    if option == "1":  # If the user selects option 1
-        pokemon = input("Enter the Pokémon's name: ").lower()  # Prompt the user to enter a Pokémon name
-        clear()  # Clear the console screen
-        control = Api.basic_info(pokemon)  # Display basic information about the Pokémon
-        if control == 1:  # If the Pokémon was not found
-            Api.save_pokemon(pokemon)  # Save the Pokémon's details to the CSV file
-            Api.get_pokemon_stats(pokemon)  # Get the Pokémon's detailed information
-            Api.show_pokemon_stats_graph(pokemon)  # Show the bar graph of the Pokémon's statistics
+Api = PokemonGo()
+Api.createtypesdata()  # Create the types data if it doesn't exist
+
+def main():
+    while True:
+        option = menu()  # Display the main menu and get the user's option
+        if option == "1":  # If the user selects option 1
+            pokemon = input("Enter the Pokémon's name: ").lower()  # Prompt the user to enter a Pokémon name
+            clear()  # Clear the console screen
+            control = Api.basic_info(pokemon)  # Display basic information about the Pokémon
+            if control == 1:  # If the Pokémon was not found
+                Api.save_pokemon(pokemon)  # Save the Pokémon's details to the CSV file
+                Api.get_pokemon_stats(pokemon)  # Get the Pokémon's detailed information
+                Api.show_pokemon_stats_graph(pokemon)  # Show the bar graph of the Pokémon's statistics
+            else:
+                pass
+            clear()  # Clear the console screen
+
+        elif option == "2":  # If the user selects option 2
+            try:
+                os.system('cls')  # Clear the console screen
+                df = pd.read_csv('pokemons.csv')  # Read the Pokémon data from the CSV file
+                print(df)  # Print the DataFrame
+                clear()  # Clear the console screen
+            except FileNotFoundError:
+                print("You have not registered pokemons yet.")
+                clear()  # Clear the console screen
+
+        elif option == "3":  # If the user selects option 3
+            Api.all_pokemon_stats()  # Show the bar graph of the statistics of all Pokémon
+            clear()  # Clear the console screen
+
+        elif option == "4":  # If the user selects option 4
+            clear_csv()  # Clear the CSV file
+            clear()  # Clear the console screen
+
+        elif option == "5":  # If the user selects option 3
+            break  # Exit the program
+
         else:
-            pass
-        clear()  # Clear the console screen
-
-    elif option == "2":  # If the user selects option 2
-        try:
-            os.system('cls')  # Clear the console screen
-            df = pd.read_csv('pokemons.csv')  # Read the Pokémon data from the CSV file
-            print(df)  # Print the DataFrame
-            clear()  # Clear the console screen
-        except FileNotFoundError:
-            print("You have not registered pokemons yet.")
+            print("Invalid option")  # If the user enters an invalid option
             clear()  # Clear the console screen
 
-    elif option == "3":  # If the user selects option 3
-        Api.all_pokemon_stats()  # Show the bar graph of the statistics of all Pokémon
-        clear()  # Clear the console screen
-
-    elif option == "4":  # If the user selects option 4
-        clear_csv()  # Clear the CSV file
-        clear()  # Clear the console screen
-
-    elif option == "5":  # If the user selects option 3
-        break  # Exit the program
-
-    else:
-        print("Invalid option")  # If the user enters an invalid option
-        clear()  # Clear the console screen
-
+if __name__ == "__main__":
+    main()

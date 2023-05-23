@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pokédex</title>
+</head>
+<body>
+    <h1>Welcome to the Pokédex</h1>
+    <form method="POST" action="/add">
+        <label for="pokemon">Enter the Pokémon's name:</label><br>
+        <input type="text" id="pokemon" name="pokemon"><br>
+        <input type="submit" value="Register Pokémon">
+    </form>
+    <br>
+    <a href="/show_all">View all Pokémon</a>
+    <br>
+    <a href="/show_stats">Stats of all Pokémon</a>
+    <br>
+    <a href="/clear">Clear files</a>
+    <br>
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+</body>
+</html>

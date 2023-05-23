@@ -9,7 +9,8 @@ def clear():
     Function to clear the console screen.
     """
     input("Press enter to continue...")  # Wait for user input
-    os.system('cls')  # Clear the console screen
+    #clear console if mac = clear, if windows = cls
+    os.system('cls' if os.name == 'nt' else 'clear')  # Clear the console screen
 
 class PokemonGo():
     """
