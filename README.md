@@ -23,13 +23,13 @@
 
 <h2 id="installation"> 🎈 Installation 🎈 </h2>
 
-1. Clone the repository to your local machine using:
+1. Clone the repository to your local machine on terminal using:
    ```bash
-   git clone https://github.com/username/pokemongo.git
+   git clone https://github.com/JavierRangel2004/API-Workshop.git
    ```
 2. Navigate into the cloned directory:
    ```bash
-   cd pokemongo
+   cd API-Workshop
    ```
 3. Make sure you have the required Python packages installed. You can install them via pip:
    ```bash
