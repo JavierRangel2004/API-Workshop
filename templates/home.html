@@ -24,8 +24,12 @@
                 <span class="add-icon"></span>
             </div>
         </form>
-            {% if message %}
+            {% if messages %}
                 <h2>Results:</h2>
+
+                {% for message in messages %}
+                    <p class = "message">{{ message }}</p>
+                {% endfor %}
                 <p class = "message">{{ message }}</p>
             {% endif %}
     </div>

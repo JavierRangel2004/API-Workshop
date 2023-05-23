@@ -18,10 +18,15 @@ def home():
 def add():
     name = request.form.get('pokemon').lower()
     basic_info = pokedex.basic_info(name)
-
+    messages=[]
     if basic_info["notFound"]:
-        message = "The Pokémon was not found."
+        messages.append("The Pokémon was not found.")
     else:
+        messages.append(f'{name.capitalize()} is of type {" ".join(basic_info["type"])}')
+        messages.append(f'{name.capitalize()} is resistant to {", ".join(basic_info["resistant"])}')
+        messages.append(f'{name.capitalize()} is weak against {", ".join(basic_info["weaknesses"])}')
+        messages.append(f'{name.capitalize()} has advantage against {", ".join(basic_info["advantages"])}')
+
         message = f'{name.capitalize()} is of type {" ".join(basic_info["type"])}\n' + \
                              f'{name.capitalize()} is resistant to {", ".join(basic_info["resistant"])}\n' + \
                              f'{name.capitalize()} is weak against {", ".join(basic_info["weaknesses"])}\n' + \
@@ -31,7 +36,7 @@ def add():
         pokedex.save_pokemon(name)
         pokedex.get_pokemon_stats(name)
     
-    return render_template('home.html', message=message)
+    return render_template('home.html', messages=messages)
 
 @app.route('/show_all')
 def show_all():
