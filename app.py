@@ -16,17 +16,21 @@ def home():
 
 @app.route('/add', methods=['POST'])
 def add():
+    messages=[]
     name = request.form.get('pokemon').lower().replace(" ", "-")
+    if len(name) == 0:
+        messages.append("You must enter a Pokémon name.")
+        return render_template('home.html', messages=messages)
     if name[len(name)-1] == "-":
         name=name.replace("-", "")
     basic_info = pokedex.basic_info(name)
-    messages=[]
     if basic_info["notFound"]:
         messages.append("The Pokémon was not found.")
         image=""
     else:
         image=pokedex.get_pokemon_image(name)
         messages.append(f'{name.capitalize()}')
+        messages.append(f'Type: {", ".join(basic_info["type"])}')
         messages.append(f'Resistances: {", ".join(basic_info["resistant"])}')
         messages.append(f'Weaknesses: {", ".join(basic_info["weaknesses"])}')
         messages.append(f'Advantages: {", ".join(basic_info["advantages"])}')
