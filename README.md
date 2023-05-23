@@ -25,7 +25,7 @@
 
 1. Clone the repository to your local machine using:
    ```bash
-   git clone git@github.com:JavierRangel2004/API-Workshop.git
+   git clone https://github.com/JavierRangel2004/API-Workshop.git
    ```
 2. Navigate into the cloned directory:
    ```bash
