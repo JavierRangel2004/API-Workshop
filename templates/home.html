@@ -2,24 +2,32 @@
 <html>
 <head>
     <title>Pokédex</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="//db.onlinewebfonts.com/c/f4d1593471d222ddebd973210265762a?family=Pokemon" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-    <h1>Welcome to the Pokédex</h1>
-    <form method="POST" action="/add">
-        <label for="pokemon">Enter the Pokémon's name:</label><br>
-        <input type="text" id="pokemon" name="pokemon"><br>
-        <input type="submit" value="Register Pokémon">
-    </form>
-    {% if message %}
-        <h2>Output:</h1>
-        <p>{{ message }}</p>
-    {% endif %}
-    <br>
-    <a href="/show_all">View all Pokémon</a>
-    <br>
-    <a href="/show_stats">Stats of all Pokémon</a>
-    <br>
-    <a href="/clear">Clear files</a>
-    <br>
+    <nav>
+        <span><a><img src="https://fontmeme.com/permalink/230523/53c3530bd77edfd4eab1ae23ba311986.png" border="0"></a></span>
+        <span><a href="/show_all"><img src="https://fontmeme.com/permalink/230523/809e2b953e77d22de932ea96fbe4fef5.png" border="0"></a></span>
+        <span><a href="/show_stats"><img src="https://fontmeme.com/permalink/230523/224d6332940fe811ec7cbdfa051059d9.png" border="0"></a></span>
+        <span><a href="/clear"><img src="https://fontmeme.com/permalink/230523/a759703dfcd53ec1a03f37e99f5f9f1c.png" border="0"></a></span>
+    </nav>
+    <div class="Content">
+        <header>
+            <h1>Welcome to the Pokéhub!</h1>
+        </header>
+        <form method="POST" action="/add">
+            <label for="pokemon">Register your Pokémon here:</label><br>
+            <input class="input" type="text" id="pokemon" name="pokemon" placeholder="eg. Bulbasaur"><br>
+            <div class="icon-btn add-btn">
+                <input type="submit" value="Register Pokémon" class="btn-input">
+                <span class="add-icon"></span>
+            </div>
+        </form>
+            {% if message %}
+                <h2>Results:</h2>
+                <p class = "message">{{ message }}</p>
+            {% endif %}
+    </div>
 </body>
 </html>

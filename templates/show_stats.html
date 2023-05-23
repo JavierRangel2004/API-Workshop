@@ -2,16 +2,23 @@
 <html>
 <head>
     <title>Pokémon Stats</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <!-- Plotly.js -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
     <h1>Pokémon Stats</h1>
-    {% for pokemon_stat in pokemons_stats %}
-        <p>Name: {{ pokemon_stat.name }} | HP: {{ pokemon_stat.hp }} | Attack: {{ pokemon_stat.attack }} | Defense: {{ pokemon_stat.defense }} | Special Attack: {{ pokemon_stat.special_attack }} | Special Defense: {{ pokemon_stat.special_defense }} | Speed: {{ pokemon_stat.speed }}</p>
-    {% endfor %}
     <div>
         {{ plot_div|safe }}
+    </div>
+    <div class="pokemon-container">
+        {% for pokemon in pokemons_stats %}
+            <div>
+                <img src="{{ pokemon.image }}" alt="{{ pokemon.name }}">
+                <p>{{ pokemon.name }}</p>
+            </div>
+        {% endfor %}
     </div>
     <a href="/">Back</a>
 </body>
