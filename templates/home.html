@@ -10,6 +10,16 @@
         <input type="text" id="pokemon" name="pokemon"><br>
         <input type="submit" value="Register Pokémon">
     </form>
+    {% if basic_info %}
+    <div>
+        <h3>Recently Registered Pokémon Info:</h3>
+        <p>{{ basic_info }}</p>
+    </div>
+    {% endif %}
+    {% if message %}
+        <h2>Output:</h1>
+        <p>{{ message }}</p>
+    {% endif %}
     <br>
     <a href="/show_all">View all Pokémon</a>
     <br>
@@ -17,8 +27,5 @@
     <br>
     <a href="/clear">Clear files</a>
     <br>
-    {% if message %}
-        <p>{{ message }}</p>
-    {% endif %}
 </body>
 </html>
