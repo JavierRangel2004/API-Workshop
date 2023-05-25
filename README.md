@@ -9,7 +9,7 @@
 
 <div align="center">
     <p>
-    PokémonGo is a Python-based web application that uses the <a href="https://pokeapi.co/">PokéAPI</a> to fetch data about different Pokémon and store it locally for future use and analysis. The tool is also capable of displaying the fetched data in different ways including graphically.
+    PokéHub is a Python-based web application that uses the <a href="https://pokeapi.co/">PokéAPI</a> to fetch data about different Pokémon and store it locally for future use and analysis. The tool is also capable of displaying the fetched data in different ways including graphically.
     </p>
 </div>
 
@@ -25,11 +25,11 @@
 
 1. Clone the repository to your local machine using:
    ```bash
-   git clone https://github.com/JavierRangel2004/API-Workshop.git
+   git clone https://github.com/JavierRangel2004/Pok-Hub.git
    ```
 2. Navigate into the cloned directory:
    ```bash
-   cd API-Workshop
+   cd Pok-Hub
    ```
 3. Make sure you have the required Python packages installed. You can install them via pip:
    ```bash
