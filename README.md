@@ -1,4 +1,4 @@
-# API-Workshop
+# PokéHub
 
 
 <h1 align="center">🔥 PokéHub - A Pokémon Analyzer and Tracker 🔥</h1>
