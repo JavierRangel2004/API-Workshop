@@ -1,7 +1,7 @@
 # API-Workshop
 
 
-<h1 align="center">🔥 PokémonGo - A Pokémon Analyzer and Tracker 🔥</h1>
+<h1 align="center">🔥 PokéHub - A Pokémon Analyzer and Tracker 🔥</h1>
 
 <div align="center">
   <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pokémon_logo.svg" width="300" height="150">
